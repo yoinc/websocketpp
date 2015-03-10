@@ -466,6 +466,7 @@ public:
         std::string const & reason, lib::error_code & ec);
     void close(connection_hdl hdl, close::status::value const code,
         std::string const & reason);
+    void terminate(connection_hdl hdl, lib::error_code & ec);
 
     /// Send a ping to a specific connection
     /**
