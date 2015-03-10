@@ -316,6 +316,18 @@ public:
         m_alog.write(log::alevel::devel,"connection constructor");
     }
 
+    ~connection() {
+      // Cancel timers
+      if (m_handshake_timer) {
+        m_handshake_timer->cancel();
+        m_handshake_timer.reset();
+      }
+      if (m_ping_timer) {
+        m_ping_timer->cancel();
+        m_ping_timer.reset();
+      }
+    }
+
     /// Get a shared pointer to this component
     ptr get_shared() {
         return lib::static_pointer_cast<type>(transport_con_type::get_shared());
