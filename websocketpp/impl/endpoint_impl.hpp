@@ -214,6 +214,15 @@ void endpoint<connection,config>::close(connection_hdl hdl, close::status::value
 }
 
 template <typename connection, typename config>
+void endpoint<connection,config>::terminate(connection_hdl hdl, lib::error_code & ec)
+{
+    connection_ptr con = get_con_from_hdl(hdl,ec);
+    if (ec) {return;}
+    con->terminate(ec);
+    //con->close_sync();
+}
+
+template <typename connection, typename config>
 void endpoint<connection,config>::ping(connection_hdl hdl, std::string const &
     payload, lib::error_code & ec)
 {
